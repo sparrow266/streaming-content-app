@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "e4f94871-5dc1-4d6b-9ae5-8e0c7e82e759",
+		"name": "Streaming Content API",
+		"description": "API collection for the Streaming Content Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login to get an access token"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"username\": \"testuser\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new user"
+					},
+					"response": []
+				}
+			],
+			"description": "Authentication endpoints"
+		},
+		{
+			"name": "Streaming Content",
+			"item": [
+				{
+					"name": "Get All Streaming Content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/streaming",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"streaming"
+							]
+						},
+						"description": "Get a list of all streaming content items"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Streaming Content by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/streaming/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"streaming",
+								"1"
+							]
+						},
+						"description": "Get a single streaming content item by ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Streaming Content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Streaming Content\",\n    \"description\": \"Description for the new streaming content\",\n    \"thumbnail_url\": \"https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?auto=format&fit=crop&w=1080&q=80\",\n    \"video_url\": \"https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/streaming",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"streaming"
+							]
+						},
+						"description": "Create a new streaming content item (requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Streaming Content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Updated Content Title\",\n    \"description\": \"Updated content description\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/streaming/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"streaming",
+								"1"
+							]
+						},
+						"description": "Update an existing streaming content item (requires authentication)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Streaming Content",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/streaming/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"streaming",
+								"1"
+							]
+						},
+						"description": "Delete a streaming content item by ID (requires authentication)"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for managing streaming content"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
